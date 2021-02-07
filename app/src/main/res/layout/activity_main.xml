@@ -11,8 +11,8 @@
         android:id="@+id/result"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="result"
-        android:layout_above="@id/mainKeyboard"
+        android:text="CalcNT"
+        android:layout_above="@id/keyboardPanel"
         android:gravity="center"
         android:layout_margin="8dp"
         android:padding="8dp"
@@ -21,14 +21,58 @@
         android:textSize="32sp"/>
 
     <GridLayout
-        android:id="@+id/mainKeyboard"
+        android:id="@+id/keyboardPanel"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_alignParentBottom="true"
         android:columnCount="4"
         android:orientation="horizontal"
         android:layout_marginBottom="8dp">
+
+        <TextView
+            android:onClick="saveValue"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="2dp"
+            android:text="S"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:background="@drawable/buttons_style"
+            android:textColor="#FFFFFF"/>
+
+        <TextView
+            android:onClick="pasteValue"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="2dp"
+            android:text="P"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:background="@drawable/buttons_style"
+            android:textColor="#FFFFFF"/>
+
+        <TextView
+            android:onClick="addSymbol"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="2dp"
+            android:text="("
+            android:textSize="20sp"
+            android:gravity="center"
+            android:background="@drawable/buttons_style"
+            android:textColor="#FFFFFF"/>
+
+        <TextView
+            android:onClick="addSymbol"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="2dp"
+            android:text=")"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:background="@drawable/buttons_style"
+            android:textColor="#FFFFFF"/>
 
         <TextView
             android:onClick="clear"
@@ -244,7 +288,5 @@
             android:textColor="#FFFFFF"/>
 
     </GridLayout>
-
-
 
 </RelativeLayout>

@@ -1,17 +1,21 @@
 package com.vladiknt.calcnt
 
+import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import kotlin.math.exp
 
 class MainActivity : AppCompatActivity() {
 
     private var isResult = true
     private var expression = ""
+    private var memory = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setContentView(R.layout.activity_main)
     }
 
@@ -21,8 +25,7 @@ class MainActivity : AppCompatActivity() {
         else {
             when (view?.id) {
                 R.id.allClear -> expression = ""
-                R.id.singleClear -> expression =
-                    expression.subSequence(0, expression.length - 1) as String
+                R.id.singleClear -> if (expression.isNotEmpty()) expression = expression.subSequence(0, expression.length - 1) as String
             }
         }
         findViewById<TextView>(R.id.result).text = expression
@@ -44,6 +47,15 @@ class MainActivity : AppCompatActivity() {
             isResult = false
         }
         expression += newView.text
+        findViewById<TextView>(R.id.result).text = expression
+    }
+
+    fun saveValue(view: View?) {
+        memory = expression
+    }
+
+    fun pasteValue(view: View?) {
+        expression += memory
         findViewById<TextView>(R.id.result).text = expression
     }
 

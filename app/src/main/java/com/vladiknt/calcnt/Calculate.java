@@ -8,17 +8,21 @@ public class Calculate {
         String result;
         try {
             result = calcFunc(new String[]{"0", input})[1];
+
+            if (result.equals("NaN"))
+                result = "error";
+                // Rounding to int if result is something like 4.0
+            else if ((long)(Double.parseDouble(result) * 100000000) == (long)Double.parseDouble(result) * 100000000)
+                result = String.valueOf((int)Double.parseDouble(result));
+                // To void situations like "0.1 + 0.2 = 0.3000000000004"
+            else if (((long)(Double.parseDouble(result) * 100000000))/100000000.0 != Double.parseDouble(result))
+                result = String.valueOf(((long)(Double.parseDouble(result) * 100000000))/100000000.0);
+
+            if (result.equals(String.valueOf(9.223372036854776E10)))
+                result = "very much";
         } catch (Exception math) {
             return "error";
         }
-
-        if ((long)(Double.parseDouble(result) * 100000000) == (long)Double.parseDouble(result) * 100000000)
-            result = String.valueOf((int)Double.parseDouble(result));
-        else if (((long)(Double.parseDouble(result) * 100000000))/100000000.0 != Double.parseDouble(result))
-            result = String.valueOf(((long)(Double.parseDouble(result) * 100000000))/100000000.0);
-
-        if (result.equals(String.valueOf(9.223372036854776E10)))
-            result = "very much";
 
         return result;
     }
