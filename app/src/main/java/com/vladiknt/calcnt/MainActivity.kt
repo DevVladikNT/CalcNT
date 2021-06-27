@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() {
 
     fun saveValue(view: View?) {
         memory = expression
+        findViewById<TextView>(R.id.memory).text = memory
     }
 
     fun pasteValue(view: View?) {
