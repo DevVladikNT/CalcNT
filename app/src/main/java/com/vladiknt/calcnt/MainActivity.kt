@@ -1,10 +1,15 @@
 package com.vladiknt.calcnt
 
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.core.view.get
+import androidx.core.view.marginBottom
 import kotlin.math.exp
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +20,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         setContentView(R.layout.activity_main)
     }
 
@@ -32,9 +36,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun result(view: View?) {
-        isResult = true
-        expression = Calculate.result(expression)
-        findViewById<TextView>(R.id.result).text = expression
+        if(expression == "19022001+") {
+            // Easter egg
+            val picture = when ((Math.random() * 10000).toInt() % 4) {
+                0 -> R.raw.ahegao1
+                1 -> R.raw.ahegao2
+                2 -> R.raw.ahegao3
+                else -> R.raw.ahegao4
+            }
+            findViewById<TextView>(R.id.result).let{
+                it.text = resources.openRawResource(picture).readBytes().decodeToString()
+                it.textSize = 14F
+            }
+            findViewById<LinearLayout>(R.id.keyboard).visibility = View.GONE
+        } else {
+            // Proper work
+            isResult = true
+            expression = Calculate.result(expression)
+            findViewById<TextView>(R.id.result).text = expression
+        }
     }
 
     fun addSymbol(view: View?) {
@@ -58,6 +78,11 @@ class MainActivity : AppCompatActivity() {
     fun pasteValue(view: View?) {
         expression += memory
         findViewById<TextView>(R.id.result).text = expression
+    }
+
+    fun menuButton(view: View?) {
+        val menu = Intent(this, MenuActivity::class.java)
+        startActivity(menu)
     }
 
 }

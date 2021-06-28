@@ -4,7 +4,7 @@ import org.junit.Test
 
 import org.junit.Assert.*
 
-class ExampleUnitTest {
+class CalculateUnitTest {
 
     @Test
     fun simpleOperations() {
@@ -46,6 +46,18 @@ class ExampleUnitTest {
     fun divByZero() {
         val expr = "0÷0"
         assertEquals("error", Calculate.result(expr))
+    }
+
+    @Test
+    fun negativeNumber() {
+        val expr = "-3+5"
+        assertEquals("2", Calculate.result(expr))
+    }
+
+    @Test
+    fun positiveNumber() {
+        val expr = "+5-3"
+        assertEquals("2", Calculate.result(expr))
     }
 
 }

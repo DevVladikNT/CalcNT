@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimaryVariant"
+    tools:context=".InfoActivity">
+
+    <LinearLayout
+        android:id="@+id/adminMessage"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/buttons_style"
+        android:elevation="8dp"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:text="Version 1.3"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginBottom="8dp"
+            android:background="?attr/colorOnPrimary" />
+
+        <TextView
+            android:id="@+id/appInfoText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Redesigned app`s UI and switched calculation core to Kotlin."
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/appInfoDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:gravity="end"
+            android:text="28.06.2021"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginBottom="8dp"
+            android:background="?attr/colorOnPrimary" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="You can contact with our community:"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="4dp"
+                android:background="#FFFFFF"
+                android:scaleType="centerInside"
+                android:src="@drawable/vk_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:text="vk.com/game_dev_spb"
+                android:textColorLink="#FFFFFF"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

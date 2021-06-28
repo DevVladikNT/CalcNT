@@ -41,7 +41,10 @@ object Calculate {
             if (str[i] != '(') {
                 when (str[i]) {
                     '+', '-', '×', '÷', '^' -> {
-                        list.add(str[i].toString())
+                        if (list.size == 0 && (str[i] == '+' || str[i] == '-'))
+                            number += str[i]
+                        else
+                            list.add(str[i].toString())
                     }
                     else -> {
                         try {
