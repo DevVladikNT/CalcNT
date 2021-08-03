@@ -39,7 +39,13 @@ class CalculateUnitTest {
     @Test
     fun veryBigValue() {
         val expr = "100000000000000000000000×10000000000000000000000"
-        assertEquals("very much", Calculate.result(expr))
+        assertEquals("∞", Calculate.result(expr))
+    }
+
+    @Test
+    fun verySmallValue() {
+        val expr = "5÷(-0)"
+        assertEquals("-∞", Calculate.result(expr))
     }
 
     @Test
@@ -58,6 +64,12 @@ class CalculateUnitTest {
     fun positiveNumber() {
         val expr = "+5-3"
         assertEquals("2", Calculate.result(expr))
+    }
+
+    @Test
+    fun zeroPointNineError() {
+        val expr = "0.3×3"
+        assertEquals("0.9", Calculate.result(expr))
     }
 
 }

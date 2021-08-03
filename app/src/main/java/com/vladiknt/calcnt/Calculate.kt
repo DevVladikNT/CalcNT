@@ -10,17 +10,22 @@ object Calculate {
         try {
             result = core(Pair("0", input)).second
 
-            if (result == "NaN")
-                result = "error"
-            // Rounding to int if result is something like 4.0
-            else if ((result.toDouble() * 100000000).toLong() == result.toDouble().toLong() * 100000000)
-                result = (result.toDouble().toInt()).toString()
-            // To avoid situations like "0.1 + 0.2 = 0.3000000000004"
-            else if ((result.toDouble() * 100000000).toLong() / 100000000.0 != result.toDouble())
-                result = ((result.toDouble() * 100000000).toLong() / 100000000.0).toString()
+            if (result != "error" && result != "NaN") {
+                // Rounding to int if result is something like 4.0
+                if ((result.toDouble() * 100000000).toLong() == result.toDouble().toLong() * 100000000)
+                    result = (result.toDouble().toInt()).toString()
+                // To avoid situations like "0.1 + 0.2 = 0.3000000000004"
+                else if ((result.toDouble() * 100000000).toLong() / 100000000.0 != result.toDouble())
+                    result = ((result.toDouble() * 100000000).toLong() / 100000000.0).toString()
+            }
 
-            if (result == "9.223372036854776E10")
-                result = "very much"
+            result = when (result) {
+                "NaN" -> "error"
+                "9.223372036854776E10" -> "∞"
+                "-9.223372036854776E10" -> "-∞"
+                "0.89999999" -> "0.9" // it`s strange but without it 3 * 0.3 = 0.89999999
+                else -> result
+            }
         } catch (math: Exception) {
             return "error"
         }

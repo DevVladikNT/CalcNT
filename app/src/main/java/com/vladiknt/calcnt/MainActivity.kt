@@ -1,16 +1,14 @@
 package com.vladiknt.calcnt
 
 import android.content.Intent
-import android.content.pm.ActivityInfo
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.core.view.get
-import androidx.core.view.marginBottom
-import kotlin.math.exp
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,12 +16,24 @@ class MainActivity : AppCompatActivity() {
     private var expression = ""
     private var memory = ""
 
+    companion object {
+        var vibrator: Vibrator? = null // for vibration while tapping
+        fun vibrate() {
+            if (Build.VERSION.SDK_INT >= 26)
+                vibrator?.vibrate(VibrationEffect.createOneShot(3, VibrationEffect.DEFAULT_AMPLITUDE))
+            else
+                vibrator?.vibrate(3)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        vibrator = getSystemService(VIBRATOR_SERVICE) as Vibrator
     }
 
     fun clear(view: View?) {
+        vibrate()
         if (isResult)
             expression = ""
         else {
@@ -36,6 +46,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun result(view: View?) {
+        vibrate()
         if(expression == "19022001+") {
             // Easter egg
             val picture = when ((Math.random() * 10000).toInt() % 4) {
@@ -58,30 +69,37 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun addSymbol(view: View?) {
+        vibrate()
         val newView = view as TextView
         if (isResult) {
             when (newView.text) {
-                "+", "-", "×", "÷", "^" -> {}
+                "+", "-", "×", "÷", "xª" -> {}
                 else -> expression = ""
             }
             isResult = false
         }
-        expression += newView.text
+        if (newView.text == "xª")
+            expression += "^"
+        else
+            expression += newView.text
         findViewById<TextView>(R.id.result).text = expression
     }
 
     fun saveValue(view: View?) {
+        vibrate()
         memory = expression
         findViewById<TextView>(R.id.memory).text = memory
     }
 
     fun pasteValue(view: View?) {
+        vibrate()
         expression += memory
         findViewById<TextView>(R.id.result).text = expression
     }
 
     fun menuButton(view: View?) {
-        val menu = Intent(this, MenuActivity::class.java)
+        vibrate()
+        val menu = Intent(this, InfoActivity::class.java)
         startActivity(menu)
     }
 
